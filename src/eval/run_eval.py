@@ -10,6 +10,8 @@ if __name__ == '__main__':
 
     pred_df = evaluator.read_prediction_file("temp/inference_test.tsv")
     pred_df = pred_df[pred_df['Task'] == 'Primary']
+    pred_df["TextNodeId"] = pred_df["TextNodeId"].astype(int)
+    
     text_df = pd.read_csv("data/test/TextNodes.csv",lineterminator='\n')
 
     pred_df = evaluator.get_text_spans_from_nodes(text_df, pred_df).dropna().sort_values(['TextNodeId'], ascending=[False])
